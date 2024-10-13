@@ -1,6 +1,4 @@
 import { useState } from "react";
-const dotenv = require("dotenv");
-dotenv.config;
 function App() {
   const [value, setValue] = useState("");
   const [weatherObj, setWeatherObj] = useState({
