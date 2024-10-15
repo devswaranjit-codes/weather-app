@@ -9,7 +9,7 @@ function App() {
     condition: "--",
     src: null
   })
-
+  
   async function fetchWeather(location) {
 
     const url = `http://api.weatherapi.com/v1/current.json?key=6fc74cf82bc44773a8a171855241407&q=${location}&aqi=no`
