@@ -1,4 +1,7 @@
 import { useState } from "react";
+import dotenv from "dotenv";
+dotenv.config();
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 function App() {
   const [value, setValue] = useState("");
   const [weatherObj, setWeatherObj] = useState({
@@ -9,10 +12,18 @@ function App() {
     condition: "--",
     src: null
   })
+  if (!API_KEY) {
+    console.error('Weather API key is missing. Please check your environment variables.');
+  }
+  
   
   async function fetchWeather(location) {
+    if (!API_KEY) {
+      alert('Weather API key is not configured. Please contact the administrator.');
+      return null;
+    }
 
-    const url = `http://api.weatherapi.com/v1/current.json?key=6fc74cf82bc44773a8a171855241407&q=${location}&aqi=no`
+    const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=no`
     // fetch -> inbuilt function to get http response from a server
     const response = await fetch(url);
     if (response.status == 400) {
