@@ -23,7 +23,11 @@ function App() {
       return null;
     }
 
+<<<<<<< HEAD
     const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=no`
+=======
+    const url = `https://api.weatherapi.com/v1/current.json?key=6fc74cf82bc44773a8a171855241407&q=${location}&aqi=no`
+>>>>>>> 58c9c8b09124e070bdb02fbcda4a64ac79fcb336
     // fetch -> inbuilt function to get http response from a server
     const response = await fetch(url);
     if (response.status == 400) {
