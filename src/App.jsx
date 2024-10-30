@@ -1,7 +1,4 @@
 import { useState } from "react";
-import dotenv from "dotenv";
-dotenv.config();
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 function App() {
   const [value, setValue] = useState("");
   const [weatherObj, setWeatherObj] = useState({
@@ -22,12 +19,7 @@ function App() {
       alert('Weather API key is not configured. Please contact the administrator.');
       return null;
     }
-
-<<<<<<< HEAD
-    const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}&aqi=no`
-=======
-    const url = `https://api.weatherapi.com/v1/current.json?key=6fc74cf82bc44773a8a171855241407&q=${location}&aqi=no`
->>>>>>> 58c9c8b09124e070bdb02fbcda4a64ac79fcb336
+    const url = `https://api.weatherapi.com/v1/current.json?key=6fc74cf82bc44773a8a171855241407&q&q=${location}&aqi=no`
     // fetch -> inbuilt function to get http response from a server
     const response = await fetch(url);
     if (response.status == 400) {
@@ -78,11 +70,11 @@ function App() {
       <header className="h-[150px] bg-[#2c3e50] flex justify-center items-center">
         <div id="input-container" className="w-[60%] flex justify-between">
           <input type="text" name="" id="" placeholder="Enter Location"
-            className="text-white text-lg bg-transparent outline-none py-4 px-0  border-b-2 border-white w-[84%] border-b-solid"
+            className="text-red text-lg bg-transparent outline-none py-4 px-0  border-b-2 border-white w-[84%] border-b-solid"
             onChange={handleInput}
           />
           <button id="search"
-            className="bg-[#267362] text-lg border-none py-4 px-8 text-white cursor-pointer rounded-lg"
+            className="bg-[#619830] text-lg text-red-400 border-none py-4 px-8 text-white cursor-pointer rounded-lg"
             onClick={handleClick}
           >Search</button>
         </div>
