@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Search, Cloud } from "lucide-react";
 
 function App() {
   const [value, setValue] = useState("");
@@ -63,47 +64,90 @@ function App() {
     setValue(e.target.value);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleClick();
+    }
+  };
+
   return (
-    <>
-      <header className="h-[150px] bg-[#2c3e50] flex justify-center items-center">
-        <div id="input-container" className="w-[60%] flex justify-between">
-        <input
-  type="text"
-  placeholder="Enter Location"
-  className="text-white text-lg bg-transparent outline-none py-4 px-0 border-b-2 border-white w-[84%] 
-             border-b-solid transition duration-300 ease-in-out 
-             focus:border-red-800"
-  onChange={handleInput}
-/>
-
-  <button
-  id="search"
-  className="bg-[#619830] text-lg border-none py-4 px-8 text-white cursor-pointer rounded-lg 
-             hover:bg-red-500 hover:text-black hover:font-bold 
-             transition duration-500 ease-in-out"
-  onClick={handleClick}
->
-  Search
-</button>
-
+    <div className="min-h-screen bg-gradient-to-br from-[#1a1c2e] to-[#2c3e50]">
+      <header className="pt-10 pb-6 px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex items-center justify-center mb-8">
+            <Cloud className="w-12 h-12 text-blue-400 float-animation mr-3" />
+            <h1 className="text-3xl font-bold text-white">Weatherlon</h1>
+          </div>
+          <div className="relative flex items-center justify-center">
+            <input
+              type="text"
+              placeholder="Enter Location"
+              className="w-full max-w-lg text-lg bg-white/10 text-white 
+                       rounded-xl py-4 pl-6 pr-16 outline-none
+                       border-2 border-transparent
+                       transition-all duration-300
+                       placeholder:text-gray-400
+                       search-input-focus"
+              onChange={handleInput}
+              onKeyPress={handleKeyPress}
+              value={value}
+            />
+            <button
+              onClick={handleClick}
+              className="absolute right-2 top-1/2 -translate-y-1/2
+                       bg-blue-500 p-2.5 rounded-lg
+                       transition-all duration-300
+                       search-button-hover
+                       active:scale-95
+                       group"
+            >
+              <Search className="w-5 h-5 text-white transition-transform duration-300 group-hover:scale-110" />
+            </button>
+          </div>
         </div>
       </header>
-      <main className="flex items-center justify-center text-white bg-[#01161E] h-[calc(100vh-150px)]">
-        <div id="weather-container" className="flex gap-4 items-center h-20">
-          <div id="temperature">{weatherObj.temp}°C</div>
-          <div id="location-date">
-            <div id="location" className="text-[2rem] mb-[1.6rem]">{weatherObj.location}</div>
-            <span id="time">TIME: {weatherObj.time}</span>
-            <br />
-            <span id="date">DATE: {weatherObj.date}</span>
-          </div>
-          <div id="weather-state">
-            <img src={weatherObj.src} alt={weatherObj.condition} id="emoji" />
-            <div id="condition" className="text-center">{weatherObj.condition}</div>
+
+      <main className="px-4 py-10">
+        <div className="max-w-3xl mx-auto">
+          <div className="glass-effect rounded-2xl p-8 weather-fade-in">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="text-center md:text-left">
+                <h2 className="text-5xl font-bold text-white mb-2">
+                  {weatherObj.temp}°C
+                </h2>
+                <h3 className="text-3xl text-gray-200 mb-4">
+                  {weatherObj.location}
+                </h3>
+                <div className="space-y-1 text-gray-300">
+                  <p className="flex items-center justify-center md:justify-start gap-2">
+                    <span className="font-medium">Time:</span> {weatherObj.time}
+                  </p>
+                  <p className="flex items-center justify-center md:justify-start gap-2">
+                    <span className="font-medium">Date:</span> {weatherObj.date}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center justify-center p-6
+                            bg-white/5 rounded-xl
+                            transform transition-transform duration-300
+                            hover:scale-105">
+                {weatherObj.src && (
+                  <img
+                    src={weatherObj.src}
+                    alt={weatherObj.condition}
+                    className="w-24 h-24 object-contain mb-4"
+                  />
+                )}
+                <p className="text-xl text-white font-medium">
+                  {weatherObj.condition}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 
